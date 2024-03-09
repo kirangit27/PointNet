@@ -76,3 +76,34 @@ Run `python train.py --task seg` to train the model. Running `python eval_seg.py
 The model excels in accurately segmenting the various components of a well-defined conventional chair, especially where the different segments like chair legs, backrests, armrests, etc are distinguishably defined. 
 However, its performance experiences a decline when faced with unconventional chair designs, particularly those that integrate the legs and base. 
 In such instances, the model encounters challenges, often misidentifying a substantial part of the legs as the seat.
+
+
+## Robustness Analysis
+
+###  Rotating Pointclouds
+
+Evaluating the classification and segmentation models on rotated point-clouds. Point-clouds are either rotated along all x,y, and z axes combined or individually along a single axis.
+
+   ```
+          def rotate_test_data(point_cloud, angles):
+          # Convert angles to radians 
+          alpha, beta, gamma = np.deg2rad(angles)
+
+          # Define rotation matrices
+          Rx = torch.Tensor([[1,         0,           0       ],
+                            [0, np.cos(alpha), -np.sin(alpha)],
+                            [0, np.sin(alpha),  np.cos(alpha)]]).to(args.device) 
+          
+          Ry = torch.Tensor([[ np.cos(beta), 0, np.sin(beta)], 
+                            [     0,        1,       0     ], 
+                            [-np.sin(beta), 0, np.cos(beta)]]).to(args.device)
+          
+          Rz = torch.Tensor([[np.cos(gamma), -np.sin(gamma), 0],
+                            [np.sin(gamma),  np.cos(gamma), 0],
+                            [      0,             0,        1]]).to(args.device)
+
+          # Combine rotations
+          R_xyz = torch.matmul(Rz, torch.matmul(Ry, Rx))
+
+          rotated_point_cloud = torch.matmul(point_cloud, R_xyz)
+          return rotated_point_cloud
