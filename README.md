@@ -34,7 +34,7 @@ Run `python train.py --task cls` to train the model, and `python eva_cls.py` for
 |-------|--------------|------------|
 | Chair | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/gt/595_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/pred/595_lamp.gif" alt="Input RGB" width="200"/> |
 | Vase  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/gt/620_vase.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/pred/620_lamp.gif" alt="Input RGB" width="200"/>  | 
-| Lamp  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/gt/750_lamp.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/pred/750_vase.gif" alt="Input RGB" width="200"/>  |  |
+| Lamp  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/gt/750_lamp.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/pred/750_vase.gif" alt="Input RGB" width="200"/>  |  
 
 
 #### Interpretation
@@ -84,26 +84,49 @@ In such instances, the model encounters challenges, often misidentifying a subst
 
 Evaluating the classification and segmentation models on rotated point-clouds. Point-clouds are either rotated along all x,y, and z axes combined or individually along a single axis.
 
+#### Procedure
    ```
-          def rotate_test_data(point_cloud, angles):
-          # Convert angles to radians 
-          alpha, beta, gamma = np.deg2rad(angles)
+   def rotate_test_data(point_cloud, angles):
+        # Convert angles to radians 
+        alpha, beta, gamma = np.deg2rad(angles)
 
-          # Define rotation matrices
-          Rx = torch.Tensor([[1,         0,           0       ],
-                            [0, np.cos(alpha), -np.sin(alpha)],
-                            [0, np.sin(alpha),  np.cos(alpha)]]).to(args.device) 
-          
-          Ry = torch.Tensor([[ np.cos(beta), 0, np.sin(beta)], 
-                            [     0,        1,       0     ], 
-                            [-np.sin(beta), 0, np.cos(beta)]]).to(args.device)
-          
-          Rz = torch.Tensor([[np.cos(gamma), -np.sin(gamma), 0],
-                            [np.sin(gamma),  np.cos(gamma), 0],
-                            [      0,             0,        1]]).to(args.device)
+        # Define rotation matrices
+        Rx = torch.Tensor([[1,         0,           0       ],
+                          [0, np.cos(alpha), -np.sin(alpha)],
+                          [0, np.sin(alpha),  np.cos(alpha)]]).to(args.device) 
+        
+        Ry = torch.Tensor([[ np.cos(beta), 0, np.sin(beta)], 
+                          [     0,        1,       0     ], 
+                          [-np.sin(beta), 0, np.cos(beta)]]).to(args.device)
+        
+        Rz = torch.Tensor([[np.cos(gamma), -np.sin(gamma), 0],
+                          [np.sin(gamma),  np.cos(gamma), 0],
+                          [      0,             0,        1]]).to(args.device)
 
-          # Combine rotations
-          R_xyz = torch.matmul(Rz, torch.matmul(Ry, Rx))
+        # Combine rotations
+        R_xyz = torch.matmul(Rz, torch.matmul(Ry, Rx))
 
-          rotated_point_cloud = torch.matmul(point_cloud, R_xyz)
-          return rotated_point_cloud
+        rotated_point_cloud = torch.matmul(point_cloud, R_xyz)
+        return rotated_point_cloud
+```
+
+Before starting the prediction the input test_data (point clouds) is rotated with the desired angles along x,y, and z.
+
+```
+    #input point cloud rotation for Robustness Analysis
+    angle_x, angle_y, angle_z = 90,0,0
+    rotation_angles = (angle_x, angle_y, angle_z) 
+    test_data = rotate_test_data(test_data, rotation_angles)
+```
+#### Visualizations - Classification
+
+Rotation along x, y, and z:
+
+| Class | Ground Truth | 0&deg; | 45&deg; | 90&deg; | 
+|-------|--------------|------------|--------------|------------|
+| Chair | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_10/gt/460_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/pred/460_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_45/pred/460_vase.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_90/pred/460_chair.gif" alt="Input RGB" width="200"/> | 
+| Vase  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_10/gt/650_vase.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/pred/650_vase.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_45/pred/650_vase.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_90/pred/650_vase.gif" alt="Input RGB" width="200"/>  |
+| Lamp  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_10/gt/950_lamp.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/pred/950_lamp.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_45/pred/950_vase.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_90/pred/950_lamp.gif" alt="Input RGB" width="200"/>  | 
+| Test Accuracy  | -  | __97.58%__ | __24.65%__  |  __49.94%__  | 
+
+
