@@ -172,5 +172,48 @@ Test Accuracy with varying rotations (Segmentation) -
   
 - In the segmentation task, the model heavily relies on spatial features. Notably, it consistently segments the lower portion of the point cloud as chair legs, even in scenarios involving conventional chair structures.
 
-  
+
+### Varying Number of Points
+
+Evaluating the classification and segmentation models with varying the number of points present in the point clouds.
+
+#### Procedure
+
+Feed the --num_points argument while running eval_cls.py and eval_seg.py to vary the number of points.
+
+```
+  $  python3 eval_cls.py --num_points <n>
+  $  python3 eval_seg.py --num_points <n>
+     #where n = 10, 100, 500, 1000
+```
+
+#### Visualizations - Classification
+
+| Class | Ground Truth | 10 points | 100 points | 1000 points | 
+|-------|--------------|------------|--------------|------------|
+| Chair | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/gt/425_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_num_points/cls_points_10/pred/425_lamp.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_num_points/cls_points_100/pred/425_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_num_points/cls_points_1000/pred/425_chair.gif" alt="Input RGB" width="200"/> | 
+| Vase  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/gt/700_vase.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_num_points/cls_points_10/pred/700_lamp.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_num_points/cls_points_100/pred/700_vase.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_num_points/cls_points_1000/pred/700_vase.gif" alt="Input RGB" width="200"/>  |
+| Lamp  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/gt/850_lamp.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_num_points/cls_points_10/pred/850_lamp.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_num_points/cls_points_100/pred/850_lamp.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_num_points/cls_points_1000/pred/850_lamp.gif" alt="Input RGB" width="200"/>  | 
+| Test Accuracy  | -  | __25.05%__ | __91.08%__  |  __96.95%__  | 
+
+Test Accuracy with varying num_points (Classification)
+
+![Test Accuracy with varying num_points (Classification)](output/cls_num_points/cls_num_points_chart.png)  
+
+#### Visualizations - Segmentation
+
+| Class | Ground Truth | 10 points | 100 points | 1000 points | 
+|-------|--------------|------------|--------------|------------|
+| Example 1 | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg/gt/0_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_num_points/seg_points_10/pred/0_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_num_points/seg_points_100/pred/0_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_num_points/seg_points_1000/pred/0_chair.gif" alt="Input RGB" width="200"/> | 
+| Example 2  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg/gt/400_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_num_points/seg_points_10/pred/400_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_num_points/seg_points_100/pred/400_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_num_points/seg_points_1000/pred/400_chair.gif" alt="Input RGB" width="200"/>  |
+| Example 3  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg/gt/600_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_num_points/seg_points_10/pred/600_chair.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_num_points/seg_points_100/pred/600_chair.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_num_points/seg_points_1000/pred/600_chair.gif" alt="Input RGB" width="200"/>  | 
+| Test Accuracy  | -  | __67.84%__ | __79.93%__  |  __84.86%__  | 
+
+Test Accuracy with varying num_points (Segmentation)
+![Test Accuracy with varying num_points (Segmentation)](output/seg_num_points/seg_num_points_chart.png)
+
+#### Interpretation
+- In the classification task, the model performs terribly when the number of points is too low, for --num_points = 10, the model classifies the majority of the inputs as lamps. However, the accuracy of the model rises exponentially by just increasing the number of points to 100, and the rise in accuracy becomes stagnant after a point.  
+
+- Unlike the classification task, the segmentation task does not perform too badly for a smaller number of points, and the increase in accuracy is almost linear throughout until it reaches its optimum level, unlike the exponential rise seen in the classification task.
 
