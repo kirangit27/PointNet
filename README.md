@@ -129,4 +129,48 @@ Rotation along x, y, and z:
 | Lamp  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_10/gt/950_lamp.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/pred/950_lamp.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_45/pred/950_vase.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/all_xyz/cls_rot_all_90/pred/950_lamp.gif" alt="Input RGB" width="200"/>  | 
 | Test Accuracy  | -  | __97.58%__ | __24.65%__  |  __49.94%__  | 
 
+Rotation along x only:
+
+| Class | Ground Truth | 0&deg; | 45&deg; | 90&deg; | 
+|-------|--------------|------------|--------------|------------|
+| Chair | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/along_x/cls_rot_x_10/gt/520_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/pred/520_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/along_x/cls_rot_x_45/pred/520_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/along_x/cls_rot_x_90/pred/520_chair.gif" alt="Input RGB" width="200"/> | 
+| Vase  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/along_x/cls_rot_x_10/gt/640_vase.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/pred/640_vase.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/along_x/cls_rot_x_45/pred/640_vase.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/along_x/cls_rot_x_90/pred/640_vase.gif" alt="Input RGB" width="200"/>  |
+| Lamp  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/along_x/cls_rot_x_10/gt/790_lamp.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls/pred/790_lamp.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/along_x/cls_rot_x_45/pred/790_lamp.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/cls_rotation/along_x/cls_rot_x_90/pred/790_lamp.gif" alt="Input RGB" width="200"/>  | 
+| Test Accuracy  | -  | __97.58%__ | __35.88%__  |  __44.91%__  | 
+
+Test Accuracy with varying rotations (Classification) - 
+
+![Test Accuracy with varying rotations (Classification)](output/cls_rotation/cls_rot_chart.png)
+
+
+#### Visualizations - Segmentation
+
+Rotation along x, y, and z:
+
+| Class | Ground Truth | 0&deg; | 45&deg; | 90&deg; | 
+|-------|--------------|------------|--------------|------------|
+| Example 1 | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/all_xyz/seg_rot_all_10/gt/0_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg/pred/0_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/all_xyz/seg_rot_all_45/pred/0_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/all_xyz/seg_rot_all_90/pred/0_chair.gif" alt="Input RGB" width="200"/> | 
+| Example 2  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/all_xyz/seg_rot_all_10/gt/400_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg/pred/400_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/all_xyz/seg_rot_all_45/pred/400_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/all_xyz/seg_rot_all_90/pred/400_chair.gif" alt="Input RGB" width="200"/>  |
+| Example 3  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/all_xyz/seg_rot_all_10/gt/600_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg/pred/600_chair.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/all_xyz/seg_rot_all_45/pred/600_chair.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/all_xyz/seg_rot_all_90/pred/600_chair.gif" alt="Input RGB" width="200"/>  | 
+| Test Accuracy  | -  | __88.52%__ | __59.40%__  |  __61.60%__  | 
+
+Rotation along x only:
+
+| Class | Ground Truth | 0&deg; | 45&deg; | 90&deg; | 
+|-------|--------------|------------|--------------|------------|
+| Example 1 | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/along_x/seg_rot_x_10/gt/200_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg/pred/200_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/along_x/seg_rot_x_45/pred/200_chair.gif" alt="Input RGB" width="200"/> | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/along_x/seg_rot_x_90/pred/200_chair.gif" alt="Input RGB" width="200"/> | 
+| Example 2  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/along_x/seg_rot_x_10/gt/150_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg/pred/150_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/along_x/seg_rot_x_45/pred/150_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/along_x/seg_rot_x_90/pred/150_chair.gif" alt="Input RGB" width="200"/>  |
+| Example 3  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/along_x/seg_rot_x_10/gt/500_chair.gif" alt="Input RGB" width="200"/>  | <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg/pred/500_chair.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/along_x/seg_rot_x_45/pred/500_chair.gif" alt="Input RGB" width="200"/>  |  <img src="https://github.com/kirangit27/PointNet/blob/master/output/seg_rotation/along_x/seg_rot_x_90/pred/500_chair.gif" alt="Input RGB" width="200"/>  | 
+| Test Accuracy  | -  | __88.52%__ | __35.88%__  |  __16.25%__  | 
+
+Test Accuracy with varying rotations (Segmentation) - 
+
+![Test Accuracy with varying rotations (Classification)](output/seg_rotation/seg_rot_chart.png)
+
+#### Interpretation
+-  In the classification task, an intriguing pattern emerges when point clouds are rotated at angles to 90° along all the axes, even though the final orientation is very similar to the one without rotations, the accuracy of the model falls to half.  Interestingly, when the point clouds are completely inverted, the model's performance improves slightly compared to the 90° rotations.  Another observation was that the accuracy falls drastically when point clouds are only rotated along x compared to other directions, even the combined one. 
+  
+- In the segmentation task, the model heavily relies on spatial features. Notably, it consistently segments the lower portion of the point cloud as chair legs, even in scenarios involving conventional chair structures.
+
+  
 
